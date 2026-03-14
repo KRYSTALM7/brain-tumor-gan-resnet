@@ -1,8 +1,0 @@
-tensorflow==2.15.0
-opencv-python==4.9.0.80
-scikit-learn==1.4.0
-matplotlib==3.8.2
-seaborn==0.13.2
-numpy==1.26.4
-gradio==4.31.0
-Pillow==10.2.0
