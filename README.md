@@ -3,13 +3,13 @@
 ![Python](https://img.shields.io/badge/Python-3.10-blue?style=flat-square&logo=python)
 ![TensorFlow](https://img.shields.io/badge/TensorFlow-2.15-orange?style=flat-square&logo=tensorflow)
 ![License](https://img.shields.io/badge/License-MIT-green?style=flat-square)
-![Status](https://img.shields.io/badge/Status-Complete-brightgreen?style=flat-square)
+[![Paper](https://img.shields.io/badge/Paper-IET%202025-purple?style=flat-square)](https://doi.org/10.1049/PBPC076E_ch6)
 
 A deep learning pipeline for binary brain tumor classification from MRI scans, combining **Generative Adversarial Networks (GAN)** for data augmentation with a **ResNet50** transfer learning classifier.
 
 This project is an implementation based on the research published in:
 
-> Khekare, G., Gupta, S.K., & Pandya, S. (2025). *Harnessing Generative AI for Enhanced Brain Tumor Detection in Clinical Trials.* In **Generative AI Unleashed**, IET, Chapter 6. https://doi.org/10.1049/PBPC076E_ch6
+> MV Sujan Kumar, Ganesh Khekare, Shashi Kant Gupta, and Sharnil Pandya. *Harnessing generative AI for enhanced brain tumor detection in clinical trials.* In **Generative AI Unleashed**, Chapter 6, pp. 83–101, IET, 2025. https://doi.org/10.1049/PBPC076E_ch6
 
 ---
 
@@ -36,7 +36,7 @@ GAN Training  Real Images
     │         │
     ▼         │
 Generator     │
-Conv2DTranspose ×3│
+Conv2DTranspose ×3
 tanh output   │
     │         │
     ▼         ▼
@@ -86,8 +86,6 @@ MRI Scans   (70%)
 
 ## Results
 
-### Metrics
-
 | Metric | Value |
 |--------|-------|
 | Accuracy | **98.87%** |
@@ -96,25 +94,13 @@ MRI Scans   (70%)
 | F1 Score | 92.93% |
 | AUC-ROC | 0.96 |
 
-### Model Comparison
+### Confusion Matrix
 
-| Model | Precision (%) | Recall (%) | F1 Score (%) | Accuracy (%) |
-|-------|--------------|-----------|-------------|-------------|
-| GoogleNet | 60.29 | 70.39 | 64.95 | 55.26 |
-| VGG16 | 72.41 | 93.85 | 81.75 | 75.33 |
-| DenseNet | 58.80 | 100.00 | 74.10 | 58.80 |
-| Custom CNN | 90.00 | 95.50 | 92.60 | 91.00 |
-| **GAN + ResNet50 (Ours)** | **93.74** | **92.14** | **92.93** | **98.87** |
+![Confusion Matrix](assets/confusion_matrix.png)
 
-### Plots
+### ROC Curve
 
-| Training History | ROC Curve |
-|:---:|:---:|
-| ![Training](assets/training_history.png) | ![ROC](assets/roc_curve.png) |
-
-| Confusion Matrix | Model Comparison |
-|:---:|:---:|
-| ![Confusion](assets/confusion_matrix.png) | ![Comparison](assets/model_comparison.png) |
+![ROC Curve](assets/roc_curve.png)
 
 ---
 
@@ -139,11 +125,9 @@ MRI Scans   (70%)
 brain-tumor-gan-resnet/
 ├── app/
 │   └── app.py              # Gradio inference app
-├── assets/                 # Result plots for README
+├── assets/
 │   ├── confusion_matrix.png
-│   ├── model_comparison.png
-│   ├── roc_curve.png
-│   └── training_history.png
+│   └── roc_curve.png
 ├── data/
 │   ├── yes/                # Tumor MRI images (not included)
 │   ├── no/                 # Normal MRI images (not included)
@@ -152,14 +136,14 @@ brain-tumor-gan-resnet/
 │   └── brain_tumor_detection.ipynb
 ├── outputs/
 │   ├── models/             # Saved .keras models (not included)
-│   └── plots/              # Generated evaluation plots
+│   └── plots/
 ├── src/
-│   ├── config.py           # Hyperparameters and paths
-│   ├── data_loader.py      # Image loading and augmentation
-│   ├── gan.py              # Generator, discriminator, training loop
-│   ├── classifier.py       # ResNet50 classifier head
-│   ├── train.py            # End-to-end training pipeline
-│   └── evaluate.py         # Metrics, plots, reports
+│   ├── config.py
+│   ├── data_loader.py
+│   ├── gan.py
+│   ├── classifier.py
+│   ├── train.py
+│   └── evaluate.py
 ├── requirements.txt
 ├── LICENSE
 └── README.md
@@ -169,48 +153,19 @@ brain-tumor-gan-resnet/
 
 ---
 
-## Setup
-
-```bash
-git clone https://github.com/KRYSTALM7/brain-tumor-gan-resnet.git
-cd brain-tumor-gan-resnet
-
-python -m venv venv
-venv\Scripts\activate        # Windows
-# source venv/bin/activate   # macOS/Linux
-
-pip install -r requirements.txt
-```
-
-### Requirements
-
-```
-tensorflow==2.15.0
-opencv-python==4.9.0.80
-scikit-learn==1.4.0
-matplotlib==3.8.2
-seaborn==0.13.2
-numpy==1.26.4
-gradio==3.50.2
-Pillow==10.2.0
-```
-
----
-
 ## Citation
 
-If you use this work or reference the underlying research, please cite:
-
 ```bibtex
-@incollection{kumar2025brain,
-  author    = {Kumar, MV Sujan and Khekare, Ganesh and Gupta, Shashi Kant and Pandya, Sharnil},
-  title     = {Harnessing Generative {AI} for Enhanced Brain Tumor Detection in Clinical Trials},
-  booktitle = {Generative {AI} Unleashed},
-  publisher = {Institution of Engineering and Technology ({IET})},
-  year      = {2025},
-  chapter   = {6},
+@inbook{doi:10.1049/PBPC076E_ch6,
+  author    = {MV Sujan Kumar and Ganesh Khekare and Shashi Kant Gupta and Sharnil Pandya},
+  title     = {Harnessing generative AI for enhanced brain tumor detection in clinical trials},
+  booktitle = {Generative AI Unleashed},
+  chapter   = {Chapter 6},
+  pages     = {83--101},
   doi       = {10.1049/PBPC076E_ch6},
-  url       = {https://doi.org/10.1049/PBPC076E_ch6}
+  url       = {https://digital-library.theiet.org/doi/abs/10.1049/PBPC076E_ch6},
+  year      = {2025},
+  publisher = {Institution of Engineering and Technology}
 }
 ```
 
